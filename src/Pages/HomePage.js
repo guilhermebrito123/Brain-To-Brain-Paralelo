@@ -1,14 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { Button, BottomNavigation, FAB } from 'react-native-paper';
+import { Button, FAB } from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native'
+
 
 const HomePage = () => {
+
+  const navigation = useNavigation()
 
   const asset1 = require('../Assets/Home1.png')
   const asset2 = require('../Assets/Media.png')
 
   return (    
-    <View>
+    <View style={{flex: 1}}>
       <Image source={asset1} style={styles.image1} />
       <View style={styles.view1}>
         <Text style={styles.title1}>Não sabe por onde começar? </Text>
@@ -42,7 +46,7 @@ const HomePage = () => {
         style={styles.fab}
         small
         icon="plus"
-        onPress={() => console.log('Pressed')}
+        onPress={() => navigation.navigate('CursoADD')}
       />    
     </View>
     

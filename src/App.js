@@ -1,12 +1,13 @@
 import { Text, SafeAreaView, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
 import Home from './components/Home'
-import List from './Pages/List1'
-
 
 export default function App() {
   return (
-      <Home />
+        <NavigationContainer>
+          <Home />
+        </NavigationContainer>
   );
 }
 
