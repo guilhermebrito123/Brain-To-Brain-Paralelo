@@ -4,9 +4,9 @@ import { Button, TextInput } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 
-const Editar = ({ setStage }) => {
+const Editar = () => {
   const [text, setText] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage] = useState(null);
   const [documents, setDocuments] = useState([]);
 
   const asset1 = require('../Assets/profile.png')

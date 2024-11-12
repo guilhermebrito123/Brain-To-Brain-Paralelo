@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native'
 import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const Cadastro = ({setStage}) => {
     
   const [text, setText] = useState("");
+  const navigation = useNavigation()
 
   return(
     <View style={styles.view1}>
       <View style={{display: 'flex', flexDirection: 'row', marginTop: '20px', width: '354px', alignItems: 'center', justifyContent: 'center'}}>
-        <Button style={styles.loginTitle} color='#04A9C8' textColor='white' mode="contained" onPress={() => setStage(1)}>
+        <Button style={styles.loginTitle} color='#04A9C8' textColor='white' mode="contained" onPress={() => navigation.navigate('Login')}>
           Login
         </Button>
         <Button style={styles.createTitle} color='#039BE5' mode="contained" onPress={() => setStage(2)}>
@@ -27,6 +29,12 @@ const Cadastro = ({setStage}) => {
         <TextInput
         style={styles.input}
         label="Telefone"
+        value={text}
+        onChangeText={text => setText(text)}
+        />
+        <TextInput
+        style={styles.input}
+        label="Data de nascimento"
         value={text}
         onChangeText={text => setText(text)}
         />
@@ -55,7 +63,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#039BE5',
-    height: '450px',
+    height: '500px',
     width: '354px',
     marginVertical: 'auto',
     marginHorizontal: 'auto',

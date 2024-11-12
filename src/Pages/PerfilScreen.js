@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import { Button } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
 import { useNavigation } from '@react-navigation/native'; 
 
 const ProfilePage = () => {
+
+  const navigation = useNavigation() 
+
   const [profileImage, setProfileImage] = useState(null);
 
   const pickImage = async () => {
@@ -17,6 +22,21 @@ const ProfilePage = () => {
 
     if (!result.canceled) {
       setProfileImage(result.uri);
+    }
+  };
+
+  const [text, setText] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [documents, setDocuments] = useState([]);
+
+  const pickDocuments = async () => {
+    const result = await DocumentPicker.getDocumentAsync({
+      type: 'application/pdf', // Especifica que quer apenas PDFs
+      multiple: true, // Permite a seleção de vários arquivos
+    });
+
+    if (result.type !== 'cancel') {
+      setDocuments((prevDocs) => [...prevDocs, result]);
     }
   };
 
@@ -43,7 +63,6 @@ const ProfilePage = () => {
             placeholderTextColor="#fff" 
           />
         </View>
-
         <View style={styles.inputContainer}>
           <TextInput 
             style={styles.input} 
@@ -61,13 +80,14 @@ const ProfilePage = () => {
           />
         </View>
 
+        <View style={styles.inputContainer}>
+           <Button style={styles.input} mode="contained" onPress={pickDocuments}>+  Certificados </Button>   
+        </View>
+
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>ANTERIOR</Text>
-          </TouchableOpacity>
           <TouchableOpacity
             style={styles.navButton}
-            onPress={() => navigation.navigate('CursoADD')} 
+            onPress={() => navigation.navigate('Edit2')} 
           >
             <Text style={styles.navButtonText}>AVANÇAR</Text>
           </TouchableOpacity>
@@ -137,7 +157,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'end',
     width: '100%',
   },
   navButton: {

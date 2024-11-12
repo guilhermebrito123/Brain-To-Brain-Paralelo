@@ -1,30 +1,31 @@
 import * as React from 'react';
 import { BottomNavigation } from 'react-native-paper';
 
-import HomePage from '../Pages/HomePage'
 
 import ContentDisplay from '../Pages/ContentDisplay'
 
-import Editar from '../Pages/Editar'
+import HomePage from '../Pages/HomePage'
+
+import PerfilScreen from '../Pages/PerfilScreen'
+
+import HomeMain from '../Navigations/HomeMain'
 
 import List1 from '../Pages/List1'
 
-import Main from '../Navigations/Main'
+import PerfilEdit from '../Navigations/PerfilEdit'
 
 const Home = () => {
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = React.useState(2);
   const [routes] = React.useState([
-    { key: 'main', title: 'Main', icon: 'home' },
+    { key: 'homemain', title: 'Home', icon: 'home' },
     { key: 'contentdisplay', title: 'Content-display', icon: 'table-of-contents' },
     { key: 'edit', title: 'Edit', icon: 'account-edit' },
-    { key: 'list1', title: 'List1', icon: 'table-of-contents' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    main: Main,
+    homemain: HomeMain,
     contentdisplay: ContentDisplay,
-    edit: Editar,
-    list1: List1
+    edit: PerfilScreen,
   });
 
   return (

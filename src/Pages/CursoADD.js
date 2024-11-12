@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
+
 
 const CursoADD = () => {
+
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
@@ -37,7 +41,7 @@ const CursoADD = () => {
         </View>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.navButton} onPress={() => navigation.goBack()}>
+          <TouchableOpacity style={styles.navButton} onPress={() => navigation.goBack('HomeAdd')}>
             <Text style={styles.navButtonText}>ANTERIOR</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.navButton}>

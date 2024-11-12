@@ -2,18 +2,21 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native'
 
-const Login = ({setStage}) => {
-    
+const Login = () => {
+
+  const navigation = useNavigation()  
+
   const [text, setText] = useState("");
 
   return(
     <View style={styles.view1}>
       <View style={{display: 'flex', flexDirection: 'row', marginTop: '20px', width: '354px', alignItems: 'center', justifyContent: 'center'}}>
-        <Button style={styles.loginTitle} color='#039BE5' textColor='white' mode="contained" onPress={() => setStage(1)}>
+        <Button style={styles.loginTitle} color='#039BE5' textColor='white' mode="contained" >
           Login
         </Button>
-        <Button style={styles.createTitle} color='#04A9C8' mode="contained" onPress={() => setStage(2)}>
+        <Button style={styles.createTitle} color='#04A9C8' mode="contained" onPress={() => navigation.goBack()}>
           Cadastro
         </Button>
       </View>
