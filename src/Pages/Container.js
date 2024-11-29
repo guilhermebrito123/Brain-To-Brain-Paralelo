@@ -26,7 +26,7 @@ const Container = ({children}) => {
         </TouchableOpacity>
         <FAB
           style={styles.fab}
-          small
+          size="small"
           icon="plus"
           onPress={() => navigation.navigate('CursoADD')}
         />

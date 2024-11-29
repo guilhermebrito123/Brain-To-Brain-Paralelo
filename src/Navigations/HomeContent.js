@@ -10,7 +10,7 @@ const ContentStack = createNativeStackNavigator();
 const HomeContent = () => {
 
   return(
-      <ContentStack.Navigator screenOptions={{headerStyle: {backgroundColor: '#039BE5'}, headerTintColor:"white"}}>
+      <ContentStack.Navigator screenOptions={{headerStyle: {backgroundColor: '#007bff'}, headerTintColor:"white"}}>
         <ContentStack.Screen name="ContentDisplay" component={ContentDisplay} options={{title: "CURSOS DISPONÍVEIS"}} />
       </ContentStack.Navigator>
   )

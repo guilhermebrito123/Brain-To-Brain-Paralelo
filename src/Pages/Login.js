@@ -1,85 +1,121 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native'
-import { Button } from 'react-native-paper';
-import { TextInput } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native'
+import React, { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { Button } from "react-native-paper";
+import { TextInput } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {
-
-  const navigation = useNavigation()  
+  const navigation = useNavigation();
 
   const [text, setText] = useState("");
 
-  return(
+  return (
     <View style={styles.view1}>
-      <View style={{display: 'flex', flexDirection: 'row', marginTop: '20px', width: '354px', alignItems: 'center', justifyContent: 'center'}}>
-        <Button style={styles.loginTitle} color='#039BE5' textColor='white' mode="contained" >
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginTop: "20px",
+          width: "354px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Button
+          style={styles.loginTitle}
+          buttonColor="#039BE5"
+          textColor="white"
+          mode="contained"
+        >
           Login
         </Button>
-        <Button style={styles.createTitle} color='#04A9C8' mode="contained" onPress={() => navigation.goBack()}>
+        <Button
+          style={styles.createTitle}
+          buttonColor="#04A9C8"
+          mode="contained"
+          onPress={() => navigation.goBack()}
+        >
           Cadastro
         </Button>
       </View>
-      <View style={{marginHorizontal: 'auto', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
+      <View
+        style={{
+          marginHorizontal: "auto",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-evenly",
+        }}
+      >
         <TextInput
-        style={styles.input}
-        label="Email"
-        value={text}
-        onChangeText={text => setText(text)}
+          style={styles.input}
+          label="Email"
+          value={text}
+          onChangeText={(text) => setText(text)}
         />
         <TextInput
-        style={styles.input}
-        label="Senha"
-        value={text}
-        onChangeText={text => setText(text)}
-        />      
-      <Button style={styles.entrarBotao} color='#04A9C8' mode="contained" onPress={() => console.log('Pressed')}>
+          style={styles.input}
+          label="Senha"
+          value={text}
+          onChangeText={(text) => setText(text)}
+        />
+        <Button
+          style={styles.entrarBotao}
+          buttonColor="#04A9C8"
+          mode="contained"
+          onPress={() => console.log("Pressed")}
+        >
           Entrar
-      </Button>
-      <Button style={styles.esqueceuBotao} color='#04A9C8' mode="contained" onPress={() => console.log('Pressed')}>
+        </Button>
+        <Button
+          style={styles.esqueceuBotao}
+          buttonColor="#04A9C8"
+          mode="contained"
+          onPress={() => console.log("Pressed")}
+        >
           Esqueceu a senha?
-      </Button>   
-      </View>   
+        </Button>
+      </View>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   view1: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: '#039BE5',
-    height: '400px',
-    width: '354px',
-    marginVertical: 'auto',
-    marginHorizontal: 'auto',
-    borderRadius: '33px'
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#039BE5",
+    height: 400,
+    width: 354,
+    marginVertical: "auto",
+    marginHorizontal: "auto",
+    borderRadius: 33,
   },
   loginTitle: {
-    padding: '10px',
-    fontSize: '24px',
-    fontFamily: 'Inter',
-    borderRadius: '33px'
+    padding: 10,
+    fontSize: 24,
+    fontFamily: "Inter",
+    borderRadius: 33,
   },
   createTitle: {
-    padding: '10px',
-    fontSize: '24px',
-    fontFamily: 'Inter',
-    borderRadius: '33px'
+    padding: 10,
+    fontSize: 24,
+    fontFamily: "Inter",
+    borderRadius: 33,
   },
   input: {
-    width: '250px',
-    backgroundColor: 'white'
+    width: 250,
+    backgroundColor: "white",
   },
-  entrarBotao:{
-    width: '100px',
-    marginHorizontal: 'auto',
-    borderRadius: '33px'
+  entrarBotao: {
+    width: 100,
+    marginHorizontal: "auto",
+    borderRadius: 33,
   },
-  esqueceuBotao:{
-    marginHorizontal: 'auto',
-    borderRadius: '33px'
+  esqueceuBotao: {
+    marginHorizontal: "auto",
+    borderRadius: 33,
   },
-})
+});
 
-export default Login; 
+export default Login;

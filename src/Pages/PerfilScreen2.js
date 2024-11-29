@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,32 +7,34 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  CheckBox,
-} from 'react-native';
-import { Button } from 'react-native-paper';
-import { Ionicons } from '@expo/vector-icons';
-import * as DocumentPicker from 'expo-document-picker';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { Button } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
+import * as DocumentPicker from "expo-document-picker";
+import { useNavigation } from "@react-navigation/native";
+import { CheckBox } from "react-native-elements";
 
 const ProfilePage2 = () => {
+  const navigation = useNavigation();
 
-  const navigation = useNavigation()
+  const [checked, setChecked] = React.useState(true);
+  const [checked1, setChecked1] = React.useState(true);
+  const [checked2, setChecked2] = React.useState(true);
+  const toggleCheckbox = () => setChecked(!checked);
+  const toggleCheckbox1 = () => setChecked1(!checked1);
+  const toggleCheckbox2 = () => setChecked2(!checked2);
 
-  const [isSelected0, setSelection0] = useState(false);
-  const [isSelected1, setSelection1] = useState(false);
-  const [isSelected2, setSelection2] = useState(false);
-
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [documents, setDocuments] = useState([]);
 
   const pickDocuments = async () => {
     const result = await DocumentPicker.getDocumentAsync({
-      type: 'application/pdf', // Especifica que quer apenas PDFs
+      type: "application/pdf", // Especifica que quer apenas PDFs
       multiple: true, // Permite a seleção de vários arquivos
     });
 
-    if (result.type !== 'cancel') {
+    if (result.type !== "cancel") {
       setDocuments((prevDocs) => [...prevDocs, result]);
     }
   };
@@ -43,25 +45,37 @@ const ProfilePage2 = () => {
         <Text style={styles.label}>DISPONIBILIDADE:</Text>
         <View style={styles.checkboxContainer}>
           <CheckBox
-            value={isSelected0}
-            onValueChange={setSelection0}
-            style={styles.checkbox}
+            checked={checked}
+            onPress={toggleCheckbox}
+            // Use ThemeProvider to make change for all checkbox
+            iconType="material-community"
+            checkedIcon="checkbox-marked"
+            uncheckedIcon="checkbox-blank-outline"
+            checkedColor="red"
           />
           <Text style={styles.label2}>Matutino</Text>
         </View>
         <View style={styles.checkboxContainer}>
           <CheckBox
-            value={isSelected1}
-            onValueChange={setSelection1}
-            style={styles.checkbox}
+            checked={checked1}
+            onPress={toggleCheckbox1}
+            // Use ThemeProvider to make change for all checkbox
+            iconType="material-community"
+            checkedIcon="checkbox-marked"
+            uncheckedIcon="checkbox-blank-outline"
+            checkedColor="red"
           />
           <Text style={styles.label2}>Vespertino</Text>
         </View>
         <View style={styles.checkboxContainer}>
           <CheckBox
-            value={isSelected2}
-            onValueChange={setSelection2}
-            style={styles.checkbox}
+            checked={checked2}
+            onPress={toggleCheckbox2}
+            // Use ThemeProvider to make change for all checkbox
+            iconType="material-community"
+            checkedIcon="checkbox-marked"
+            uncheckedIcon="checkbox-blank-outline"
+            checkedColor="red"
           />
           <Text style={styles.label2}>Noturno</Text>
         </View>
@@ -83,7 +97,10 @@ const ProfilePage2 = () => {
         </View>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.navButton} onPress={() => navigation.goBack('Edit1')}>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => navigation.goBack("Edit1")}
+          >
             <Text style={styles.navButtonText}>ANTERIOR</Text>
           </TouchableOpacity>
         </View>
@@ -104,72 +121,72 @@ const ProfilePage2 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#B3E5FC',
+    backgroundColor: "#B3E5FC",
   },
 
   contentContainer: {
-    alignItems: 'center',
-    margin: 'auto',
+    alignItems: "center",
+    margin: "auto",
   },
   inputContainer: {
-    width: '80%',
+    width: "80%",
     marginBottom: 20,
-    position: 'relative',
+    position: "relative",
   },
   input: {
-    backgroundColor: '#039BE5',
-    color: '#fff',
+    backgroundColor: "#039BE5",
+    color: "#fff",
     padding: 15,
     borderRadius: 10,
     fontSize: 16,
   },
   checkboxContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 20,
-    width: '80%',
-    backgroundColor: '#039BE5',
-    position: 'relative',
+    width: "80%",
+    backgroundColor: "#039BE5",
+    position: "relative",
     padding: 10,
     borderRadius: 10,
   },
   checkbox: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   label: {
     margin: 8,
     fontSize: 25,
-    color: '#039BE5',
-    fontWeight: 'bold'
+    color: "#039BE5",
+    fontWeight: "bold",
   },
   label2: {
     margin: 8,
     fontSize: 16,
-    color: 'white'
+    color: "white",
   },
   buttonContainer: {
-    flexDirection: 'row',
-    width: '80%',
-    justifyContent: 'start',
+    flexDirection: "row",
+    width: "80%",
+    justifyContent: "start",
   },
   navButton: {
-    backgroundColor: '#00ACC1',
+    backgroundColor: "#00ACC1",
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,
   },
   navButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   footer: {
     marginTop: 40,
-    alignItems: 'center',
+    alignItems: "center",
   },
   footerText: {
-    color: '#0077C2',
+    color: "#0077C2",
     fontSize: 12,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 5,
   },
 });

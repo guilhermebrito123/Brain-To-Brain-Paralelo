@@ -1,44 +1,44 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Button, FAB, IconButton, MD3Colors } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import React from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Button, FAB, IconButton, MD3Colors } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const HomePage = () => {
   const navigation = useNavigation();
 
-  const asset1 = require('../Assets/Home1.png');
-  const asset2 = require('../Assets/Media.png');
-
   return (
     <View style={styles.view}>
-      <Image source={asset1} style={styles.image1} />
+      <Image source={require("../Assets/Home1.png")} style={styles.image1} />
       <View style={styles.view1}>
         <Text style={styles.title1}>Não sabe por onde começar? </Text>
         <Text>
-          Seja{' '}
-          <View
+          Seja{" "}
+          <Text
             style={{
-              fontFamily: 'cursive',
-              fontWeight: 'bold',
-              fontStyle: 'italic',
-            }}>
-            {' '}
-            premium{' '}
-          </View>
-          e tenha um especialista para te ajudar nessa jornada{' '}
+              fontFamily: "cursive",
+              fontWeight: "bold",
+              fontStyle: "italic",
+            }}
+          >
+            {" "}
+            premium{" "}
+          </Text>
+          e tenha um especialista para te ajudar nessa jornada{" "}
         </Text>
       </View>
       <View style={styles.view2}>
-        <Image source={asset2} style={styles.image2} />
+        <Image source={require("../Assets/Media.png")} style={styles.image2} />
         <View style={styles.view21}>
           <Text style={styles.texto21}>
             Conheça mais sobre o desenvolvimento de aplicativos móveis
           </Text>
           <Button
-            style={{ marginTop: '10px' }}
-            color="white"
+            style={{ marginTop: "10px" }}
+            buttonColor="white"
+            textColor="black"
             mode="contained"
-            onPress={() => navigation.navigate('HomeCreate')}>
+            onPress={() => navigation.navigate("HomeCreate")}
+          >
             Cadastre-se
           </Button>
         </View>
@@ -52,10 +52,12 @@ const HomePage = () => {
             Desenvolva sites e webapps com HTML, CSS e Javascript
           </Text>
           <Button
-            style={{ width: '70%' }}
-            color="transparent"
+            style={{ width: "70%" }}
+            buttonColor="#039BE5"
+            textColor="white"
             mode="contained"
-            onPress={() => navigation.navigate('List1Add')}>
+            onPress={() => navigation.navigate("List1Add")}
+          >
             Saiba mais
           </Button>
         </View>
@@ -64,13 +66,15 @@ const HomePage = () => {
             Conheça mais sobre o desenvolvimento Back-end
           </Text>
           <Text style={styles.texto322}>
-            Conhece as funcionalidades do Github?{' '}
+            Conhece as funcionalidades do Github?{" "}
           </Text>
           <Button
-            style={{ width: '70%' }}
-            color="transparent"
+            style={{ width: "70%" }}
+            buttonColor="#039BE5"
+            textColor="white"
             mode="contained"
-            onPress={() => navigation.navigate('List1Add')}>
+            onPress={() => navigation.navigate("List1Add")}
+          >
             Leia mais
           </Button>
         </View>
@@ -78,35 +82,37 @@ const HomePage = () => {
       <View style={styles.bottomBar}>
         <TouchableOpacity style={styles.bottomButton}>
           <IconButton
-            color='white'
+            iconColor="white"
             icon="home"
             size={30}
-            onPress={() => navigation.navigate('HomeEdit')}
-            />
+            onPress={() => navigation.navigate("HomeEdit")}
+          />
         </TouchableOpacity>
         <TouchableOpacity style={styles.bottomButton}>
           <IconButton
-            color='white'
+            iconColor="white"
             icon="account"
             size={30}
-            onPress={() => navigation.navigate('PerfilEdit')}
-            />
+            onPress={() => navigation.navigate("PerfilEdit")}
+          />
         </TouchableOpacity>
         <TouchableOpacity style={styles.bottomButton}>
           <IconButton
-            color='white'
+            iconColor="white"
             icon="table-of-contents"
             size={30}
-            onPress={() => navigation.navigate('HomeContent')}
-            />
-        </TouchableOpacity>        
+            onPress={() => navigation.navigate("HomeContent")}
+          />
+        </TouchableOpacity>
       </View>
       <FAB
-          style={styles.fab}
-          small
-          icon="plus"
-          onPress={() => navigation.navigate('CursoADD')}
-        />
+        style={styles.fab}
+        color="white"
+        rippleColor="white"
+        size="small"
+        icon="plus"
+        onPress={() => navigation.navigate("CursoADD")}
+      />
     </View>
   );
 };
@@ -116,114 +122,114 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image1: {
-    width: '100%',
+    width: "100%",
   },
   view1: {
-    backgroundColor: '#F2F2F2',
-    padding: '10px',
+    backgroundColor: "#F2F2F2",
+    padding: 10,
   },
   title1: {
-    fontSize: '15px',
-    fontFamily: 'roboto',
-    fontWeight: 'bold',
-    marginBottom: '5px',
+    fontSize: 15,
+    fontFamily: "roboto",
+    fontWeight: "bold",
+    marginBottom: 5,
   },
   view2: {
-    backgroundColor: '#000',
-    height: '176px',
-    display: 'flex',
-    flexDirection: 'row',
+    backgroundColor: "#000",
+    height: 176,
+    display: "flex",
+    flexDirection: "row",
   },
   image2: {
-    height: '176px',
-    width: '40%',
+    height: 176,
+    width: "40%",
   },
   view21: {
-    width: '60%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "60%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   texto21: {
-    color: 'white',
-    fontFamily: 'roboto',
-    fontSize: '20px',
-    textAlign: 'center',
+    color: "white",
+    fontFamily: "roboto",
+    fontSize: 20,
+    textAlign: "center",
   },
   view3: {
-    backgroundColor: '#F2F2F2',
-    height: '200px',
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: '70px',
+    backgroundColor: "#F2F2F2",
+    height: 200,
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: 70,
   },
   view31: {
-    width: '50%',
-    paddingStart: '8px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "50%",
+    paddingStart: 8,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   texto31: {
-    paddingTop: '10px',
-    width: '90%',
-    height: '50%',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: '16px',
+    paddingTop: 10,
+    width: "90%",
+    height: "50%",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 16,
   },
   texto312: {
-    width: '90%',
-    textAlign: 'center',
-    fontSize: '13px',
-    marginBottom: '8px',
+    width: "90%",
+    textAlign: "center",
+    fontSize: 13,
+    marginBottom: 8,
   },
   view32: {
-    width: '50%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "50%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   texto32: {
-    paddingTop: '10px',
-    width: '90%',
-    height: '50%',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: '16px',
+    paddingTop: 10,
+    width: "90%",
+    height: "50%",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 16,
   },
   texto322: {
-    width: '90%',
-    textAlign: 'center',
-    fontSize: '13px',
-    marginBottom: '8px',
+    width: "90%",
+    textAlign: "center",
+    fontSize: 13,
+    marginBottom: 8,
   },
   fab: {
-    position: 'absolute',
+    position: "absolute",
     margin: 16,
     bottom: 68,
     right: 0,
-    backgroundColor: '#039BE5',
+    backgroundColor: "#039BE5",
   },
   bottomBar: {
-    position: 'absolute',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#039BE5',
+    position: "absolute",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#039BE5",
     paddingVertical: 10,
     bottom: 0,
-    width: '100%',
-    height: '70px'
+    width: "100%",
+    height: 70,
   },
   bottomButton: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   bottomButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 12,
   },
 });

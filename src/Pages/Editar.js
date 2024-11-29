@@ -63,7 +63,7 @@ const Editar = () => {
         <Button style={styles.certificados} mode="contained" onPress={pickDocuments}>+  Certificados </Button>          
         <Button
           style={styles.editarBotao}
-          color="#04A9C8"
+          buttonColor="#04A9C8"
           mode="contained"
           onPress={() => console.log('Pressed')}>
           Editar
@@ -79,28 +79,28 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#039BE5',
-    height: '500px',
-    width: '354px',
+    height: 500,
+    width: 354,
     margin: 'auto',
-    borderRadius: '33px',
+    borderRadius: 33,
   },
   logo: {
-    width: '150px',
-    height: '150px',
+    width: 150,
+    height: 150,
   },
   input: {
-    width: '250px',
+    width: 250,
     backgroundColor: 'white'
   },
   certificados:{
-    width: '250px',
-    height: '30px',
+    width: 250,
+    height: 30,
     textAlign: 'start'
   },
   editarBotao: {
-    width: '150px',
+    width: 150,
     marginHorizontal: 'auto',
-    borderRadius: '33px',
+    borderRadius: 33,
   },
 });
 
