@@ -97,6 +97,9 @@ const ProfilePage2 = () => {
         </View>
 
         <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.navButton}>
+            <Text style={styles.navButtonText}>EDITAR</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.navButton}
             onPress={() => navigation.goBack("Edit1")}
@@ -164,20 +167,22 @@ const styles = StyleSheet.create({
     color: "white",
   },
   buttonContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     width: "80%",
     justifyContent: "start",
+    gap: 10,
   },
   navButton: {
     backgroundColor: "#00ACC1",
     paddingVertical: 15,
-    paddingHorizontal: 30,
+    width: 120,
     borderRadius: 10,
   },
   navButtonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+    textAlign: "center",
   },
   footer: {
     marginTop: 40,

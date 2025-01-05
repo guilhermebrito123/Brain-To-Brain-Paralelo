@@ -1,12 +1,53 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Platform,
+} from "react-native";
 import { Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from "moment";
 
-const Cadastro = ({ setStage }) => {
+const Cadastro = () => {
   const [text, setText] = useState("");
   const navigation = useNavigation();
+
+  //date time picker usage:
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+  const [formattedDate, setFormattedDate] = useState("");
+
+  const onChange = (event, selectedDate) => {
+    if (event.type == "set" && selectedDate) {
+        setDate(selectedDate);
+        setFormattedDate(moment(selectedDate).format("DD/MM/YYYY"));
+        setShow(false)
+    } else {
+      setShow(false)
+    }
+  };
+
+  const showMode = (currentMode) => {
+    setMode(currentMode);
+    setShow(true);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+
+  const showTimepicker = () => {
+    showMode("time");
+  };
+
+  const toggleDatePicker = () => {
+    setShow(true);
+  };
 
   return (
     <View style={styles.view1}>
@@ -33,7 +74,6 @@ const Cadastro = ({ setStage }) => {
           style={styles.createTitle}
           buttonColor="#039BE5"
           mode="contained"
-          onPress={() => setStage(2)}
         >
           Cadastro
         </Button>
@@ -59,21 +99,28 @@ const Cadastro = ({ setStage }) => {
           value={text}
           onChangeText={(text) => setText(text)}
         />
-        <TextInput
-          style={styles.input}
-          label="Data de nascimento"
-          value={text}
-          onChangeText={(text) => setText(text)}
-        />
+
+        {show && (
+          <DateTimePicker
+            onChange={onChange}
+            testID="dateTimePicker"
+            mode={mode}
+            value={date}
+            is24Hour={true}
+          />
+        )}
+        <TouchableOpacity onPress={toggleDatePicker}>
+          <TextInput
+            style={styles.input}
+            label="Data de nascimento"
+            editable={false}
+            value={formattedDate}
+          />
+        </TouchableOpacity>
+
         <TextInput
           style={styles.input}
           label="Senha"
-          value={text}
-          onChangeText={(text) => setText(text)}
-        />
-        <TextInput
-          style={styles.input}
-          label="Confirmar senha"
           value={text}
           onChangeText={(text) => setText(text)}
         />
@@ -116,6 +163,7 @@ const styles = StyleSheet.create({
   input: {
     width: 250,
     backgroundColor: "white",
+    color: "black",
   },
   cadastroBotao: {
     width: 150,
