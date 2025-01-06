@@ -11,9 +11,15 @@ import { TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
+import CryptoJS from "crypto-js";
+import { TextInputMask } from "react-native-masked-text";
 
 const Cadastro = () => {
-  const [text, setText] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigation = useNavigation();
 
   //date time picker usage:
@@ -24,11 +30,11 @@ const Cadastro = () => {
 
   const onChange = (event, selectedDate) => {
     if (event.type == "set" && selectedDate) {
-        setDate(selectedDate);
-        setFormattedDate(moment(selectedDate).format("DD/MM/YYYY"));
-        setShow(false)
+      setDate(selectedDate);
+      setFormattedDate(moment(selectedDate).format("DD/MM/YYYY"));
+      setShow(false);
     } else {
-      setShow(false)
+      setShow(false);
     }
   };
 
@@ -90,14 +96,14 @@ const Cadastro = () => {
         <TextInput
           style={styles.input}
           label="Email"
-          value={text}
-          onChangeText={(text) => setText(text)}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           style={styles.input}
           label="Telefone"
-          value={text}
-          onChangeText={(text) => setText(text)}
+          value={telefone}
+          onChangeText={(text) => setTelefone(text)}
         />
 
         {show && (
@@ -120,9 +126,16 @@ const Cadastro = () => {
 
         <TextInput
           style={styles.input}
+          onChangeText={setPassword}
           label="Senha"
-          value={text}
-          onChangeText={(text) => setText(text)}
+          secureTextEntry={!showPassword}
+          right={
+            <TextInput.Icon
+              icon={showPassword ? "eye-off" : "eye"}
+              color="black"
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          }
         />
       </View>
       <Button
