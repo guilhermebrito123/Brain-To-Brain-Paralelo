@@ -110,7 +110,12 @@ const Cadastro = () => {
           value={telefone}
           onChangeText={setTelefone}
           placeholder="(XX) XXXXX-XXXX"
-          style={{ width: 250, backgroundColor: "white", color: "black", padding: 15 }}
+          style={{
+            width: 250,
+            backgroundColor: "white",
+            color: "black",
+            padding: 15,
+          }}
         />
 
         {show && (
