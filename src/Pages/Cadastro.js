@@ -99,11 +99,18 @@ const Cadastro = () => {
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
-        <TextInput
-          style={styles.input}
-          label="Telefone"
+
+        <TextInputMask
+          type={"cel-phone"}
+          options={{
+            maskType: "BRL",
+            withDDD: true,
+            dddMask: "(99) ",
+          }}
           value={telefone}
-          onChangeText={(text) => setTelefone(text)}
+          onChangeText={setTelefone}
+          placeholder="(XX) XXXXX-XXXX"
+          style={{ width: 250, backgroundColor: "white", color: "black", padding: 15 }}
         />
 
         {show && (
