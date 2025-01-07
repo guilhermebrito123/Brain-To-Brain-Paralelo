@@ -8,6 +8,7 @@ const Login = () => {
   const navigation = useNavigation();
 
   const [text, setText] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <View style={styles.view1}>
@@ -56,8 +57,8 @@ const Login = () => {
         <TextInput
           style={styles.input}
           label="Senha"
-          value={text}
-          onChangeText={(text) => setText(text)}
+          secureTextEntry={!showPassword}
+          right={<TextInput.Icon icon={showPassword ? "eye-off" : "eye"} onPress={() => setShowPassword(!showPassword)} />}
         />
         <Button
           style={styles.entrarBotao}
