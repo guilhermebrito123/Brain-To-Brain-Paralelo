@@ -13,6 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
 import { useNavigation } from "@react-navigation/native";
 import { CheckBox } from "react-native-elements";
+import { IconButton, MD3Colors } from "react-native-paper";
 
 const ProfilePage2 = () => {
   const navigation = useNavigation();
@@ -42,70 +43,81 @@ const ProfilePage2 = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Text style={styles.label}>DISPONIBILIDADE:</Text>
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            checked={checked}
-            onPress={toggleCheckbox}
-            // Use ThemeProvider to make change for all checkbox
-            iconType="material-community"
-            checkedIcon="checkbox-marked"
-            uncheckedIcon="checkbox-blank-outline"
-            checkedColor="red"
-          />
-          <Text style={styles.label2}>Matutino</Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Text style={styles.label}>DISPONIBILIDADE:</Text>
+          <View style={styles.checkboxContainer}>
+            <CheckBox
+              checked={checked}
+              onPress={toggleCheckbox}
+              // Use ThemeProvider to make change for all checkbox
+              iconType="material-community"
+              checkedIcon="checkbox-marked"
+              uncheckedIcon="checkbox-blank-outline"
+              checkedColor="red"
+            />
+            <Text style={styles.label2}>Matutino</Text>
+          </View>
+          <View style={styles.checkboxContainer}>
+            <CheckBox
+              checked={checked1}
+              onPress={toggleCheckbox1}
+              // Use ThemeProvider to make change for all checkbox
+              iconType="material-community"
+              checkedIcon="checkbox-marked"
+              uncheckedIcon="checkbox-blank-outline"
+              checkedColor="red"
+            />
+            <Text style={styles.label2}>Vespertino</Text>
+          </View>
+          <View style={styles.checkboxContainer}>
+            <CheckBox
+              checked={checked2}
+              onPress={toggleCheckbox2}
+              // Use ThemeProvider to make change for all checkbox
+              iconType="material-community"
+              checkedIcon="checkbox-marked"
+              uncheckedIcon="checkbox-blank-outline"
+              checkedColor="red"
+            />
+            <Text style={styles.label2}>Noturno</Text>
+          </View>
         </View>
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            checked={checked1}
-            onPress={toggleCheckbox1}
-            // Use ThemeProvider to make change for all checkbox
-            iconType="material-community"
-            checkedIcon="checkbox-marked"
-            uncheckedIcon="checkbox-blank-outline"
-            checkedColor="red"
-          />
-          <Text style={styles.label2}>Vespertino</Text>
-        </View>
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            checked={checked2}
-            onPress={toggleCheckbox2}
-            // Use ThemeProvider to make change for all checkbox
-            iconType="material-community"
-            checkedIcon="checkbox-marked"
-            uncheckedIcon="checkbox-blank-outline"
-            checkedColor="red"
-          />
-          <Text style={styles.label2}>Noturno</Text>
-        </View>
-
-        <Text style={styles.label}>ALTERAR SENHA</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="NOVA SENHA"
-            placeholderTextColor="#fff"
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="NOVA SENHA CONFIRMA"
-            placeholderTextColor="#fff"
-          />
+        <View style={styles.inputSenha}>
+          <Text style={styles.label}>ALTERAR SENHA</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="NOVA SENHA"
+              placeholderTextColor="#fff"
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="NOVA SENHA CONFIRMA"
+              placeholderTextColor="#fff"
+            />
+          </View>
         </View>
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.navButton}>
             <Text style={styles.navButtonText}>EDITAR</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.navButton}
+        </View>
+        <View style={styles.navIcon}>
+          <IconButton
+            icon="arrow-left-circle"
+            iconColor="white"
+            size={40}
             onPress={() => navigation.goBack("Edit1")}
-          >
-            <Text style={styles.navButtonText}>ANTERIOR</Text>
-          </TouchableOpacity>
+          />
         </View>
 
         <View style={styles.footer}>
@@ -128,8 +140,12 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    alignItems: "center",
     margin: "auto",
+  },
+  inputSenha: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   inputContainer: {
     width: "80%",
@@ -167,16 +183,19 @@ const styles = StyleSheet.create({
     color: "white",
   },
   buttonContainer: {
-    flexDirection: "column",
-    width: "80%",
-    justifyContent: "start",
-    gap: 10,
+    flexDirection: "row",
+    justifyContent: "center",
   },
   navButton: {
     backgroundColor: "#00ACC1",
     paddingVertical: 15,
     width: 120,
     borderRadius: 10,
+  },
+  navIcon: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-start",
   },
   navButtonText: {
     color: "#fff",

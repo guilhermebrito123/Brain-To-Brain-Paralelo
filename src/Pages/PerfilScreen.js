@@ -13,6 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import * as DocumentPicker from "expo-document-picker";
 import { useNavigation } from "@react-navigation/native";
+import { IconButton, MD3Colors } from "react-native-paper";
 
 const ProfilePage = () => {
   const navigation = useNavigation();
@@ -94,13 +95,13 @@ const ProfilePage = () => {
           </Button>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.navButton}
+        <View style={styles.navButton}>
+          <IconButton
+            icon="arrow-right-circle"
+            iconColor="white"
+            size={40}
             onPress={() => navigation.navigate("Edit2")}
-          >
-            <Text style={styles.navButtonText}>AVANÇAR</Text>
-          </TouchableOpacity>
+          />
         </View>
 
         <View style={styles.footer}>
@@ -171,11 +172,9 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   navButton: {
-    backgroundColor: "#00ACC1",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    alignItems: "center",
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   navButtonText: {
     color: "#fff",
