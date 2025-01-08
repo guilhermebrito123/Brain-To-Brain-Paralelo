@@ -55,7 +55,7 @@ const ProfilePage2 = () => {
           <Text style={styles.label}>DISPONIBILIDADE:</Text>
           <CheckBox
             containerStyle={styles.inputCheckbox}
-            textStyle={{ fontSize: 16, color: '#039BE5' }}
+            textStyle={{ fontSize: 16, color: "#039BE5" }}
             start
             title="Matutino"
             checked={check1}
@@ -63,7 +63,7 @@ const ProfilePage2 = () => {
           />
           <CheckBox
             containerStyle={styles.inputCheckbox}
-            textStyle={{ fontSize: 16, color: '#039BE5' }}
+            textStyle={{ fontSize: 16, color: "#039BE5" }}
             start
             title="Vespertino"
             checked={check2}
@@ -71,7 +71,7 @@ const ProfilePage2 = () => {
           />
           <CheckBox
             containerStyle={styles.inputCheckbox}
-            textStyle={{ fontSize: 16, color: '#039BE5' }}
+            textStyle={{ fontSize: 16, color: "#039BE5" }}
             start
             title="Noturno"
             checked={check3}
@@ -95,11 +95,15 @@ const ProfilePage2 = () => {
             />
           </View>
         </View>
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.navButton}>
-            <Text style={styles.navButtonText}>EDITAR</Text>
-          </TouchableOpacity>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <View style={styles.buttonContainer}>
+            <IconButton
+              icon="content-save-edit"
+              iconColor="white"
+              size={40}
+              onPress={() => navigation.goBack("Edit1")}
+            />
+          </View>
         </View>
         <View style={styles.navIcon}>
           <IconButton
@@ -131,7 +135,7 @@ const styles = StyleSheet.create({
 
   contentContainer: {
     margin: "auto",
-    gap: 0
+    gap: 0,
   },
   inputSenha: {
     display: "flex",
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   checkboxContainer: {
     flexDirection: "row",
@@ -179,6 +183,10 @@ const styles = StyleSheet.create({
     color: "white",
   },
   buttonContainer: {
+    justifyContent: "flex-center",
+    width: 70,
+    backgroundColor: "#039BE5",
+    borderRadius: "100%",
     flexDirection: "row",
     justifyContent: "center",
   },
