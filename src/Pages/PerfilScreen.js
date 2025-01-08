@@ -59,7 +59,7 @@ const ProfilePage = () => {
                 style={styles.avatarImage}
               />
             ) : (
-              <Ionicons name="person-circle-outline" size={100} color="#fff" />
+              <Ionicons name="person-circle-outline" size={100} color="#039BE5" />
             )}
           </TouchableOpacity>
           <Text style={styles.avatarText}>EDITAR AVATAR</Text>
@@ -69,14 +69,14 @@ const ProfilePage = () => {
           <TextInput
             style={styles.input}
             placeholder="E-MAIL"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#039BE5"
           />
         </View>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
             placeholder="CURSOS POSTADOS"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#039BE5"
           />
           <Text style={styles.dropdownArrow}>▼</Text>
         </View>
@@ -85,12 +85,12 @@ const ProfilePage = () => {
           <TextInput
             style={styles.input}
             placeholder="AREAS DE INTERESSE"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#039BE5"
           />
         </View>
 
         <View style={styles.inputContainer}>
-          <Button style={styles.input} mode="contained" onPress={pickDocuments}>
+          <Button style={styles.input} textColor="#039BE5" mode="contained" onPress={pickDocuments}>
             + Certificados{" "}
           </Button>
         </View>
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   avatarText: {
-    color: "#fff",
+    color: "#039BE5",
     fontSize: 16,
     fontWeight: "bold",
   },
@@ -153,17 +153,18 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   input: {
-    backgroundColor: "#039BE5",
-    color: "#fff",
+    backgroundColor: "#fff",
+    color: "#039BE5",
     padding: 15,
     borderRadius: 10,
     fontSize: 16,
+    fontWeight: 'bold'
   },
   dropdownArrow: {
     position: "absolute",
     right: 15,
     top: 18,
-    color: "#fff",
+    color: "#039BE5",
     fontSize: 20,
   },
   buttonContainer: {

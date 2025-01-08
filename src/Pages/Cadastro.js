@@ -6,19 +6,21 @@ import {
   Text,
   Platform,
 } from "react-native";
-import { Button } from "react-native-paper";
-import { TextInput } from "react-native-paper";
+import { Button, TextInput, List } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 import CryptoJS from "crypto-js";
 import { TextInputMask } from "react-native-masked-text";
+import * as SQLite from "expo-sqlite";
 
 const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [filterValue, setFilterValue] = useState("1"); // Valor do filtro para intValue
+  const [data, setData] = useState([]);
 
   const navigation = useNavigation();
 
@@ -54,6 +56,85 @@ const Cadastro = () => {
   const toggleDatePicker = () => {
     setShow(true);
   };
+
+  const createTable = async () => {
+    try {
+      const db = await SQLite.openDatabaseAsync("braintobrain");
+
+      await db.execAsync(`
+        PRAGMA journal_mode = WAL;
+        CREATE TABLE IF NOT EXISTS student (student_Id INTEGER PRIMARY KEY NOT NULL, email TEXT NOT NULL, telefone TEXT NOT NULL, dataNasc text NOT NULL, senha TEXT NOT NULL);
+        `);
+      console.log("Tabela criada!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const insertStudent = async () => {
+    const db = await SQLite.openDatabaseAsync("braintobrain");
+
+    const statement = await db.prepareAsync(
+      "INSERT INTO student (email, telefone, dataNasc, senha) VALUES ($email, $telefone, $dataNasc, $senha)"
+    );
+    try {
+      let result = await statement.executeAsync({
+        $email: email,
+        $telefone: telefone,
+        $dataNasc: formattedDate,
+        $senha: password,
+      });
+      console.log(result.lastInsertRowId, result.changes);
+    } finally {
+      await statement.finalizeAsync();
+    }
+  };
+
+  const selectStudent = async () => {
+    try {
+      const db = await SQLite.openDatabaseAsync("braintobrain");
+
+      const statement2 = await db.prepareAsync(
+        "SELECT * FROM student WHERE student_Id >= $fV"
+      );
+      const result = await statement2.executeAsync({
+        $fV: parseInt(filterValue, 10),
+      });
+      const allRows = await result.getAllAsync();
+      console.log("Dados recuperados:", allRows); // Verifique no console os dados recuperados
+
+      setData(allRows);
+    } finally {
+      await statement2.finalizeAsync();
+    }
+  };
+
+  const deleteStudent = async () => {
+    try {
+      const db = await SQLite.openDatabaseAsync("braintobrain");
+      await db.runAsync("DELETE FROM student WHERE student_Id = $value", {
+        $value: 1,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateStudent = async () => {
+    try {
+      const db = await SQLite.openDatabaseAsync("braintobrain");
+      await db.runAsync("UPDATE student SET email = ? WHERE student_Id = ?", [
+        "guilherme@gmail.com",
+        1,
+      ]); // Binding unnamed parameters from variadic arguments
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    createTable();
+  }, []);
 
   return (
     <View style={styles.view1}>
@@ -97,7 +178,7 @@ const Cadastro = () => {
           style={styles.input}
           label="Email"
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={setEmail}
         />
 
         <TextInputMask
@@ -150,14 +231,32 @@ const Cadastro = () => {
           }
         />
       </View>
-      <Button
-        style={styles.cadastroBotao}
-        buttonColor="#04A9C8"
-        mode="contained"
-        onPress={() => console.log("Pressed")}
-      >
-        Cadastrar
-      </Button>
+      <View>
+        <Button
+          style={styles.cadastroBotao}
+          buttonColor="#04A9C8"
+          mode="contained"
+          onPress={() => insertStudent()}
+        >
+          Cadastrar
+        </Button>
+        <Button
+          style={styles.cadastroBotao}
+          buttonColor="yellow"
+          textColor="black"
+          mode="contained"
+          onPress={() => selectStudent()}
+        >
+          Recuperar
+        </Button>
+      </View>
+      {data.map((row) => (
+        <List.Item
+          key={row.student_Id}
+          title={row.email}
+          left={(props) => <List.Icon {...props} icon="folder" />}
+        />
+      ))}
     </View>
   );
 };
@@ -167,7 +266,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#039BE5",
-    height: 500,
+    height: 600,
     width: 354,
     marginVertical: "auto",
     marginHorizontal: "auto",

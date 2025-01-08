@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import * as SQLite from "expo-sqlite";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -10,6 +11,15 @@ const Login = () => {
   const [text, setText] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const selectStudent = async() =>{
+    try {
+      const db = await SQLite.openDatabaseAsync('braintobrain');
+      const allRows = await db.getAllAsync('SELECT * FROM test');
+      console.log("all rows:", allRows)
+    } catch (error) {
+      console.log(error)
+    }
+  } 
   return (
     <View style={styles.view1}>
       <View

@@ -8,22 +8,24 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { Button } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
 import { useNavigation } from "@react-navigation/native";
-import { CheckBox } from "react-native-elements";
 import { IconButton, MD3Colors } from "react-native-paper";
+import { CheckBox, Icon } from "@rneui/themed";
 
 const ProfilePage2 = () => {
   const navigation = useNavigation();
 
-  const [checked, setChecked] = React.useState(true);
-  const [checked1, setChecked1] = React.useState(true);
-  const [checked2, setChecked2] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
+  const [checked1, setChecked1] = React.useState(false);
+  const [checked2, setChecked2] = React.useState(false);
   const toggleCheckbox = () => setChecked(!checked);
   const toggleCheckbox1 = () => setChecked1(!checked1);
   const toggleCheckbox2 = () => setChecked2(!checked2);
+
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
+  const [check3, setCheck3] = useState(false);
 
   const [text, setText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -51,42 +53,30 @@ const ProfilePage2 = () => {
           }}
         >
           <Text style={styles.label}>DISPONIBILIDADE:</Text>
-          <View style={styles.checkboxContainer}>
-            <CheckBox
-              checked={checked}
-              onPress={toggleCheckbox}
-              // Use ThemeProvider to make change for all checkbox
-              iconType="material-community"
-              checkedIcon="checkbox-marked"
-              uncheckedIcon="checkbox-blank-outline"
-              checkedColor="red"
-            />
-            <Text style={styles.label2}>Matutino</Text>
-          </View>
-          <View style={styles.checkboxContainer}>
-            <CheckBox
-              checked={checked1}
-              onPress={toggleCheckbox1}
-              // Use ThemeProvider to make change for all checkbox
-              iconType="material-community"
-              checkedIcon="checkbox-marked"
-              uncheckedIcon="checkbox-blank-outline"
-              checkedColor="red"
-            />
-            <Text style={styles.label2}>Vespertino</Text>
-          </View>
-          <View style={styles.checkboxContainer}>
-            <CheckBox
-              checked={checked2}
-              onPress={toggleCheckbox2}
-              // Use ThemeProvider to make change for all checkbox
-              iconType="material-community"
-              checkedIcon="checkbox-marked"
-              uncheckedIcon="checkbox-blank-outline"
-              checkedColor="red"
-            />
-            <Text style={styles.label2}>Noturno</Text>
-          </View>
+          <CheckBox
+            containerStyle={styles.inputCheckbox}
+            textStyle={{ fontSize: 16, color: '#039BE5' }}
+            start
+            title="Matutino"
+            checked={check1}
+            onPress={() => setCheck1(!check1)}
+          />
+          <CheckBox
+            containerStyle={styles.inputCheckbox}
+            textStyle={{ fontSize: 16, color: '#039BE5' }}
+            start
+            title="Vespertino"
+            checked={check2}
+            onPress={() => setCheck2(!check2)}
+          />
+          <CheckBox
+            containerStyle={styles.inputCheckbox}
+            textStyle={{ fontSize: 16, color: '#039BE5' }}
+            start
+            title="Noturno"
+            checked={check3}
+            onPress={() => setCheck3(!check3)}
+          />
         </View>
         <View style={styles.inputSenha}>
           <Text style={styles.label}>ALTERAR SENHA</Text>
@@ -94,14 +84,14 @@ const ProfilePage2 = () => {
             <TextInput
               style={styles.input}
               placeholder="NOVA SENHA"
-              placeholderTextColor="#fff"
+              placeholderTextColor="#039BE5"
             />
           </View>
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}
               placeholder="NOVA SENHA CONFIRMA"
-              placeholderTextColor="#fff"
+              placeholderTextColor="#039BE5"
             />
           </View>
         </View>
@@ -141,6 +131,7 @@ const styles = StyleSheet.create({
 
   contentContainer: {
     margin: "auto",
+    gap: 0
   },
   inputSenha: {
     display: "flex",
@@ -152,12 +143,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     position: "relative",
   },
+  inputCheckbox: {
+    width: "80%",
+    padding: 15,
+    borderRadius: 10,
+  },
   input: {
-    backgroundColor: "#039BE5",
-    color: "#fff",
+    backgroundColor: "#fff",
     padding: 15,
     borderRadius: 10,
     fontSize: 16,
+    fontWeight: 'bold'
   },
   checkboxContainer: {
     flexDirection: "row",
