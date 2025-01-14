@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   Platform,
+  Alert
 } from "react-native";
 import { Button, TextInput, List } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -13,6 +14,7 @@ import moment from "moment";
 import CryptoJS from "crypto-js";
 import { TextInputMask } from "react-native-masked-text";
 import * as SQLite from "expo-sqlite";
+import { useSQLiteContext } from "expo-sqlite"; // Importa o contexto
 
 const Cadastro = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +24,7 @@ const Cadastro = () => {
   const [filterValue, setFilterValue] = useState("1"); // Valor do filtro para intValue
   const [data, setData] = useState([]);
 
+  const db = useSQLiteContext(); // Acessa o banco de dados via contexto
   const navigation = useNavigation();
 
   //date time picker usage:
@@ -72,21 +75,41 @@ const Cadastro = () => {
   };
 
   const insertStudent = async () => {
-    const db = await SQLite.openDatabaseAsync("braintobrain");
-
+    createTable();
     const statement = await db.prepareAsync(
       "INSERT INTO student (email, telefone, dataNasc, senha) VALUES ($email, $telefone, $dataNasc, $senha)"
     );
-    try {
-      let result = await statement.executeAsync({
-        $email: email,
-        $telefone: telefone,
-        $dataNasc: formattedDate,
-        $senha: password,
-      });
-      console.log(result.lastInsertRowId, result.changes);
-    } finally {
-      await statement.finalizeAsync();
+    if (
+      email !== "" &&
+      telefone !== "" &&
+      formattedDate !== "" &&
+      password !== ""
+    ) {
+      try {
+        let result = await statement.executeAsync({
+          $email: email,
+          $telefone: telefone,
+          $dataNasc: formattedDate,
+          $senha: password,
+        });
+        console.log(result.lastInsertRowId, result.changes);
+        navigation.navigate("PerfilEdit");
+        setEmail("");
+        setTelefone("");
+        setFormattedDate("");
+        setPassword("");
+      } finally {
+        await statement.finalizeAsync();
+      }
+    } else {
+      return (Alert.alert('Cadastro incompleto', 'Preencha todos os campos!', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]));
     }
   };
 
@@ -222,6 +245,7 @@ const Cadastro = () => {
           onChangeText={setPassword}
           label="Senha"
           secureTextEntry={!showPassword}
+          value={password}
           right={
             <TextInput.Icon
               icon={showPassword ? "eye-off" : "eye"}
@@ -240,23 +264,7 @@ const Cadastro = () => {
         >
           Cadastrar
         </Button>
-        <Button
-          style={styles.cadastroBotao}
-          buttonColor="yellow"
-          textColor="black"
-          mode="contained"
-          onPress={() => selectStudent()}
-        >
-          Recuperar
-        </Button>
       </View>
-      {data.map((row) => (
-        <List.Item
-          key={row.student_Id}
-          title={row.email}
-          left={(props) => <List.Icon {...props} icon="folder" />}
-        />
-      ))}
     </View>
   );
 };
@@ -266,7 +274,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#039BE5",
-    height: 600,
+    height: 500,
     width: 354,
     marginVertical: "auto",
     marginHorizontal: "auto",

@@ -14,8 +14,12 @@ import * as ImagePicker from "expo-image-picker";
 import * as DocumentPicker from "expo-document-picker";
 import { useNavigation } from "@react-navigation/native";
 import { IconButton, MD3Colors } from "react-native-paper";
+import { useSQLiteContext } from "expo-sqlite"; // Importa o contexto
 
 const ProfilePage = () => {
+  const db = useSQLiteContext(); // Acessa o banco via contexto
+  const [students, setStudents] = useState([]);
+
   const navigation = useNavigation();
 
   const [profileImage, setProfileImage] = useState(null);
@@ -48,6 +52,19 @@ const ProfilePage = () => {
     }
   };
 
+  React.useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const result = await db.getAllAsync("SELECT * FROM student");
+        setStudents(result);
+      } catch (error) {
+        console.error("Erro ao buscar students:", error);
+      }
+    };
+
+    fetchStudents();
+  }, []);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -59,41 +76,25 @@ const ProfilePage = () => {
                 style={styles.avatarImage}
               />
             ) : (
-              <Ionicons name="person-circle-outline" size={100} color="#039BE5" />
+              <Ionicons
+                name="person-circle-outline"
+                size={100}
+                color="#039BE5"
+              />
             )}
           </TouchableOpacity>
           <Text style={styles.avatarText}>EDITAR AVATAR</Text>
         </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="E-MAIL"
-            placeholderTextColor="#039BE5"
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="CURSOS POSTADOS"
-            placeholderTextColor="#039BE5"
-          />
-          <Text style={styles.dropdownArrow}>▼</Text>
-        </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="AREAS DE INTERESSE"
-            placeholderTextColor="#039BE5"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Button style={styles.input} textColor="#039BE5" mode="contained" onPress={pickDocuments}>
-            + Certificados{" "}
-          </Button>
-        </View>
+        {students.map((aluno, index) => (
+          <View key={index} style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder={aluno.email}
+              placeholderTextColor="#039BE5"
+            />
+          </View>
+        ))}
 
         <View style={styles.navButton}>
           <IconButton
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   dropdownArrow: {
     position: "absolute",

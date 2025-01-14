@@ -101,7 +101,6 @@ const ProfilePage2 = () => {
               icon="content-save-edit"
               iconColor="white"
               size={40}
-              onPress={() => navigation.goBack("Edit1")}
             />
           </View>
         </View>
