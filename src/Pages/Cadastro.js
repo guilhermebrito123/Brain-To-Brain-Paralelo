@@ -93,7 +93,7 @@ const Cadastro = () => {
           $senha: password,
         });
         console.log(result.lastInsertRowId, result.changes);
-        navigation.navigate("PerfilEdit");
+        navigation.navigate("HomeAdd");
         setEmail("");
         setTelefone("");
         setFormattedDate("");
@@ -136,7 +136,7 @@ const Cadastro = () => {
     try {
       const db = await SQLite.openDatabaseAsync("braintobrain");
       await db.runAsync("DELETE FROM student WHERE student_Id = $value", {
-        $value: 1,
+        $value: 1
       });
     } catch (error) {
       console.log(error);
